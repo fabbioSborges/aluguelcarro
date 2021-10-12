@@ -15,3 +15,5 @@ Principio da inversão de Dependencia - DIP
 Modulos de alto nivel não devem depender de módulos de baixo niveis
 
 Principio da substituição de Liskov - LSP
+- Uma Classe derivada deve ser substituivel por sua classe base.
+- Você deve criar interface para suas classes base

@@ -1,15 +1,20 @@
 import Categoria from "../model/categoriaModel";
+import { ICategoriaRepositorio, ICategoria } from "./ICategoriaRepositorio";
 
-interface ICategoria {
-  nome: string;
-  descricao: string;
-}
-
-class CategoriasRepositorio {
+class CategoriasRepositorio implements ICategoriaRepositorio {
   private categorias: Categoria[];
 
-  constructor() {
+  private static INSTANCE: CategoriasRepositorio;
+
+  private constructor() {
     this.categorias = [];
+  }
+
+  public static getInstance(): CategoriasRepositorio {
+    if (!CategoriasRepositorio.INSTANCE) {
+      CategoriasRepositorio.INSTANCE = new CategoriasRepositorio();
+    }
+    return CategoriasRepositorio.INSTANCE;
   }
 
   create({ nome, descricao }: ICategoria) {
