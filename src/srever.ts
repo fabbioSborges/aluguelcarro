@@ -1,10 +1,9 @@
 import express from "express";
-import categoriasRotas from "./routes/categorias.routes";
+import rotas from "./routes";
 
 const app = express();
 app.use(express.json());
-
-app.use(categoriasRotas);
+app.use(rotas);
 
 app.listen("3000", () => {
   console.log("servidor executando na porta 3000");
