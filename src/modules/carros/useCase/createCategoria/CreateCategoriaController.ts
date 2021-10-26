@@ -1,16 +1,20 @@
 import { Request, Response } from "express";
 import CreateCategoriaUseCase from "./CreateCategoriaUseCase";
+import { container } from "tsyringe";
 
 class CreateCategoriaController {
-  createCategoriaUseCase: CreateCategoriaUseCase;
+  /* createCategoriaUseCase: CreateCategoriaUseCase;
 
   constructor(createCategoriaUseCase: CreateCategoriaUseCase) {
     this.createCategoriaUseCase = createCategoriaUseCase;
-  }
-  handle(req: Request, res: Response) {
+  } */
+
+  async handle(req: Request, res: Response): Promise<Response> {
     const { nome, descricao } = req.body;
 
-    this.createCategoriaUseCase.execute({ nome, descricao });
+    const createCategoriaUseCase = container.resolve(CreateCategoriaUseCase);
+
+    await createCategoriaUseCase.execute({ nome, descricao });
 
     return res.status(200).json({ mensage: "Adicionada com sucesso" });
   }

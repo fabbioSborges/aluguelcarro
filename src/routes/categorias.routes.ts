@@ -1,17 +1,16 @@
 import { Router } from "express";
-import { createCategoriaController } from "../modules/carros/useCase/createCategoria";
-import { listCategoriaController } from "../modules/carros/useCase/listCategoria";
+import CreateCategoriaController from "../modules/carros/useCase/createCategoria/CreateCategoriaController";
+import ListCategoriaController from "../modules/carros/useCase/listCategoria/ListCategoriaController";
 
 const categoriasRotas = Router();
 
 // Receber a requisição ----- Retornar uma reposta
 
-categoriasRotas.post("/categorias", (req, res) => {
-  return createCategoriaController.handle(req, res);
-});
+const createCategoriaController = new CreateCategoriaController();
+const listCategoriaController = new ListCategoriaController();
 
-categoriasRotas.get("/categorias", (req, res) => {
-  return listCategoriaController.handle(req, res);
-});
+categoriasRotas.post("/categorias", createCategoriaController.handle);
+
+categoriasRotas.get("/categorias", listCategoriaController.handle);
 
 export default categoriasRotas;

@@ -1,38 +1,58 @@
 import Categoria from "../../model/categoriaModel";
 import { ICategoriaRepositorio, ICategoria } from "../ICategoriaRepositorio";
+import { Repository, getRepository } from "typeorm";
 
 class CategoriasRepositorio implements ICategoriaRepositorio {
-  private categorias: Categoria[];
+  /* private categorias: Categoria[]; */
 
-  private static INSTANCE: CategoriasRepositorio;
+  private repository: Repository<Categoria>;
 
-  private constructor() {
-    this.categorias = [];
+  /* private static INSTANCE: CategoriasRepositorio; */
+
+  constructor() {
+    /* this.categorias = []; */
+    this.repository = getRepository(Categoria);
   }
 
-  public static getInstance(): CategoriasRepositorio {
+  /*   public static getInstance(): CategoriasRepositorio {
     if (!CategoriasRepositorio.INSTANCE) {
       CategoriasRepositorio.INSTANCE = new CategoriasRepositorio();
     }
     return CategoriasRepositorio.INSTANCE;
-  }
+  } */
 
-  create({ nome, descricao }: ICategoria) {
+  async create({ nome, descricao }: ICategoria): Promise<void> {
+    /*  Sem BD
     const categoria = new Categoria();
     Object.assign(categoria, { nome, descricao, created_at: new Date() });
 
-    this.categorias.push(categoria);
+    this.categorias.push(categoria); */
+
+    // COm BD
+    const categoria = this.repository.create({ nome, descricao });
+
+    await this.repository.save(categoria);
   }
 
-  list(): Categoria[] {
-    return this.categorias;
+  async list(): Promise<Categoria[]> {
+    // BD em memoria
+    /* return this.categorias; */
+
+    //Banco relacional
+    const categorias = await this.repository.find();
+    return categorias;
   }
 
-  findByName(nome: string): Categoria {
-    const categoriaExiste = this.categorias.find((categoria) => {
+  async findByName(nome: string): Promise<Categoria> {
+    //BD em memoria
+    /* const categoriaExiste = this.categorias.find((categoria) => {
       return categoria.nome === nome;
     });
-    return categoriaExiste;
+    return categoriaExiste; */
+
+    // Bd relacional
+    const categoria = await this.repository.findOne({ nome });
+    return categoria;
   }
 }
 

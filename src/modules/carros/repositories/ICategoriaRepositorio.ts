@@ -6,9 +6,9 @@ interface ICategoria {
 }
 
 interface ICategoriaRepositorio {
-  create({ nome, descricao }: ICategoria): void;
-  list(): Categoria[];
-  findByName(nome: string): Categoria;
+  create({ nome, descricao }: ICategoria): Promise<void>;
+  list(): Promise<Categoria[]>;
+  findByName(nome: string): Promise<Categoria>;
 }
 
 export { ICategoriaRepositorio, ICategoria };

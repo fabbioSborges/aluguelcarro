@@ -1,5 +1,5 @@
-import Categoria from "../model/categoriaModel";
-import { ICategoria, ICategoriaRepositorio } from "./ICategoriaRepositorio";
+/* import Categoria from "../../model/categoriaModel";
+import { ICategoria, ICategoriaRepositorio } from "./../ICategoriaRepositorio";
 
 class CategoriasRepositorioPstgre implements ICategoriaRepositorio {
   create({ nome, descricao }: ICategoria): void {
@@ -14,3 +14,4 @@ class CategoriasRepositorioPstgre implements ICategoriaRepositorio {
 }
 
 export default CategoriasRepositorioPstgre;
+ */

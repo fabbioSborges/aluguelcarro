@@ -1,0 +1,13 @@
+{
+  "type": "postgres",
+  "port": 5432,
+  "host": "localhost",
+  "username": "curso",
+  "password": "123456",
+  "database": "app_aluguel",
+  "entities": ["./src/modules/**/model/*ts"],
+  "migrations": ["./src/database/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  }
+}
